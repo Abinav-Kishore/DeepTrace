@@ -1,0 +1,16 @@
+torch>=2.2
+torchvision>=0.17
+numpy>=1.24
+opencv-python>=4.8
+Pillow>=10.0
+av>=12.0                      # PyAV: bundled FFmpeg libs, so no system ffmpeg needed
+facenet-pytorch>=2.5.3        # MTCNN face detection + cropping
+scikit-learn>=1.3
+matplotlib>=3.7
+fastapi>=0.110
+uvicorn[standard]>=0.23
+streamlit>=1.30
+pytest>=7.4
+python-multipart>=0.0.9       # FastAPI file uploads
+tqdm>=4.65
+kaggle>=1.6                   # only needed to download the DFDC sample dataset

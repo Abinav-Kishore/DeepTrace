@@ -1,0 +1,294 @@
+{
+  "seed": 42,
+  "subset_size": 40,
+  "backbone": "resnet18",
+  "frames_per_video": 16,
+  "device": "cpu",
+  "splits": {
+    "train": [
+      "dmy002",
+      "dmy003",
+      "dmy005",
+      "dmy006",
+      "dmy007",
+      "dmy008",
+      "dmy009",
+      "dmy011"
+    ],
+    "val": [
+      "dmy000",
+      "dmy004"
+    ],
+    "test": [
+      "dmy001",
+      "dmy010"
+    ]
+  },
+  "n_train": 8,
+  "n_val": 2,
+  "n_test": 2,
+  "epochs": 6,
+  "models": {
+    "baseline": {
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6425,
+          "val_auc": null,
+          "secs": 3.2
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.024,
+          "val_auc": null,
+          "secs": 2.2
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.003,
+          "val_auc": null,
+          "secs": 2.2
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.0006,
+          "val_auc": null,
+          "secs": 2.2
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.0004,
+          "val_auc": null,
+          "secs": 2.3
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.0002,
+          "val_auc": null,
+          "secs": 2.2
+        }
+      ],
+      "best_val_auc": -1.0,
+      "best_epoch": -1,
+      "test_probs": [
+        0.0004495097091421485,
+        0.9919483661651611
+      ],
+      "test_labels": [
+        0.0,
+        1.0
+      ],
+      "test_ids": [
+        "dmy001",
+        "dmy010"
+      ],
+      "test_metrics": {
+        "auc": 1.0,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "threshold": 0.5,
+        "n": 2,
+        "confusion_matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    "temporal": {
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6865,
+          "val_auc": null,
+          "secs": 1.0
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.6435,
+          "val_auc": null,
+          "secs": 1.0
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.6482,
+          "val_auc": null,
+          "secs": 1.0
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.6212,
+          "val_auc": null,
+          "secs": 1.0
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.6257,
+          "val_auc": null,
+          "secs": 1.0
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.6134,
+          "val_auc": null,
+          "secs": 1.0
+        }
+      ],
+      "best_val_auc": -1.0,
+      "best_epoch": -1,
+      "test_probs": [
+        0.33524495363235474,
+        0.36498159170150757
+      ],
+      "test_labels": [
+        0.0,
+        1.0
+      ],
+      "test_ids": [
+        "dmy001",
+        "dmy010"
+      ],
+      "frozen_backbone": true,
+      "sequence_model": "bgru",
+      "test_metrics": {
+        "auc": 1.0,
+        "accuracy": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "threshold": 0.5,
+        "n": 2,
+        "confusion_matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "baseline_vs_temporal": {
+    "auc_delta": 0.0,
+    "accuracy_delta": -0.5,
+    "f1_delta": -1.0,
+    "note": "delta = temporal - baseline (positive = temporal better)"
+  },
+  "robustness": {
+    "clean": {
+      "desc": "Original test videos (no degradation)",
+      "baseline": {
+        "accuracy": 1.0,
+        "auc": 1.0,
+        "f1": 1.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 1.0,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "h264_500kbps": {
+      "desc": "H.264 re-encode @ ~500 kbps",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 1.0,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "h264_150kbps": {
+      "desc": "H.264 re-encode @ ~150 kbps",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "down_480p": {
+      "desc": "Downscale to ~480p height",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 0.0,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "down_240p": {
+      "desc": "Downscale to ~240p height",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "blur_sigma3": {
+      "desc": "Gaussian blur sigma=3",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      }
+    },
+    "noise_sigma20": {
+      "desc": "Gaussian noise sigma=20",
+      "baseline": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      },
+      "temporal": {
+        "accuracy": 0.5,
+        "auc": 0.5,
+        "f1": 0.0,
+        "n": 2
+      }
+    }
+  }
+}
